@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <record id="import_payment_order_view" model="ir.ui.view">
+            <field name="name">payment.order.inherit</field>
+            <field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
+            <field name="arch" type="xml">
+                  <field name="line_ids" context="{'order_id': active_id or False}" position="before" >
+                       <group col="4" string="Import Payments" >
+                           <field name="import_file" on_change="onchange_imported_file(import_file,reference,date_prefered,mode,user_id)"/>
+                       </group>
+                   </field>
+
+                  <!-- Error Tree list -->
+                  <field name="line_ids" context="{'order_id': active_id or False}" position="after">
+                      <group col="4" string="Not Found on the system" >
+                          <field name="error_ids" >
+                              <tree string="Line not Found On The System" create="false" edit="false">
+                                  <field name="name"/>
+                                  <field name="reason"/>
+                              </tree>
+                          </field>
+                      </group>
+                  </field>
+            </field>
+        </record>
+
+
+        <!-- FOR TESTING ONLY - TO DELETER LATER  -->
+        <!-- #TODO : to delete the following lines -->
+         <record id="po" model="ir.ui.view">
+            <field name="name">po</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                  <field name="partner_ref" position="before" >
+                           <field name="sale_id" />
+                   </field>
+            </field>
+        </record>
+    </data>
+</openerp>
