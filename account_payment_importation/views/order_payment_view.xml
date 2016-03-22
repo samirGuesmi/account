@@ -16,7 +16,7 @@
 
                   <!-- Error Tree list -->
                   <field name="line_ids" context="{'order_id': active_id or False}" position="after">
-                      <group col="4" string="Not Found on the system" >
+                      <group col="4" string="Not Found on the system" attrs="{'invisible': [('error_ids','=', [])]}" >
                           <field name="error_ids" >
                               <tree string="Line not Found On The System" create="false" edit="false">
                                   <field name="name"/>
